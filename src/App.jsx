@@ -17,7 +17,10 @@ export default class App extends Component {
     this.setState({}, this.allSelectBool)
   }
   deleteOne = (index) => {
-    this.state.list.splice(index, 1)
+    const index1 = this.state.list.findIndex(v => {
+      return v === this.state.showList[index]
+    })
+    this.state.list.splice(index1, 1)
     this.handleFilter(this.state.type)
     this.setState({}, this.allSelectBool)
   }
@@ -32,6 +35,7 @@ export default class App extends Component {
     this.setState({
       allSelect: this.state.list.length ? this.state.list.every(item => item.status) : false
     })
+    this.handleFilter(this.state.type)
   }
   allStatus = (checked) => {
     this.setState((state) => {
@@ -85,7 +89,7 @@ export default class App extends Component {
           deleteOne={this.deleteOne}
           changeOne={this.changeOne}
         ></TodoList>
-        <FilterList handleFilter={this.handleFilter}></FilterList>
+        <FilterList handleFilter={this.handleFilter} status={this.state.list.length}></FilterList>
         你选择的是-------{this.state.type}
       </>
     )

@@ -5,3 +5,6 @@ ReactDom.render(
   <App></App>,
   document.querySelector('#root')
 )
+
+const a={a:1,b:2}
+
